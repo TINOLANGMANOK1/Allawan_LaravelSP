@@ -6,7 +6,7 @@
         <form>
             <div class="mb-3">
                 <label class="form-label">Name</label>
-                <input type="text" class="form-control" value="John Doe">
+                <input type="text" class="form-control" value="James Reino A. Allawan">
             </div>
             <div class="mb-3">
                 <label class="form-label">Course</label>
