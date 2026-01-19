@@ -3,7 +3,7 @@
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>Student List</h2>
-        <a href="{{ route('students.create') }}" class="btn btn-success">Add New Student</a>
+        <x-button :href="route('students.create')" type="success">Add New Student</x-button>
     </div>
 
     <table class="table table-striped table-bordered">
@@ -17,12 +17,13 @@
         </thead>
         <tbody>
             <tr>
-                <td>James Reino A. Allawan</td>
+                <td>John Doe</td>
                 <td>BSIT</td>
                 <td>3rd Year</td>
                 <td>
-                    <a href="{{ route('students.show') }}" class="btn btn-sm btn-info text-white">View</a>
-                    <a href="{{ route('students.edit') }}" class="btn btn-sm btn-warning">Edit</a>
+        
+                    <x-button :href="route('students.show')" type="view">View</x-button>
+                    <x-button :href="route('students.edit')" type="edit">Edit</x-button>
                 </td>
             </tr>
         </tbody>
