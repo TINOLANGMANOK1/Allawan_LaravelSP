@@ -7,18 +7,15 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
-    // READ: Display Student List
     public function index() {
-        $students = Student::all(); // Fetches all rows from 'students' table
+        $students = Student::all();
         return view('students.index', compact('students'));
     }
 
-    // CREATE: Show Form
     public function create() {
         return view('students.create');
     }
 
-    // STORE: Save to Database
     public function store(Request $request) {
         $data = $request->validate([
             'name' => 'required',
@@ -26,8 +23,34 @@ class StudentController extends Controller
             'course' => 'required',
             'year_level' => 'required',
         ]);
+        Student::create($data);
+        return redirect('/students');
+    }
 
-        Student::create($data); // Saves to studentportal database
+    // FIX FOR VIEW: Find student by ID
+    public function show($id) {
+        $student = Student::findOrFail($id);
+        return view('students.show', compact('student'));
+    }
+
+    // FIX FOR EDIT: Find student and show the edit form
+    public function edit($id) {
+        $student = Student::findOrFail($id);
+        return view('students.edit', compact('student'));
+    }
+
+    // UPDATE: Save the changes to the database
+    public function update(Request $request, $id) {
+        $student = Student::findOrFail($id);
+        
+        $data = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:students,email,' . $id,
+            'course' => 'required',
+            'year_level' => 'required',
+        ]);
+
+        $student->update($data);
         return redirect('/students');
     }
 }
