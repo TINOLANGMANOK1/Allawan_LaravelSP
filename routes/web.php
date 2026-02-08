@@ -1,19 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StudentController;
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
-Route::get('/students', function () {
-    return view('students.index');
-})->name('students.index');
-Route::get('/students/create', function () {
-    return view('students.create');
-})->name('students.create');
-Route::get('/students/1', function () {
-    return view('students.show');
-})->name('students.show');
-Route::get('/students/1/edit', function () {
-    return view('students.edit');
-})->name('students.edit');
+Route::get('/', function () { return view('home'); });
+Route::get('/home', function () { return view('home'); });
+
+// Dynamic CRUD Routes
+Route::get('/students', [StudentController::class, 'index']);
+Route::get('/students/create', [StudentController::class, 'create']);
+Route::post('/students', [StudentController::class, 'store']);
